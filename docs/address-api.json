@@ -51,7 +51,7 @@
                                         "type": "string"
                                     },
                                     "postal_code": {
-                                        "type": "number"
+                                        "type": "string"
                                     }
                                 }
                             }
@@ -85,7 +85,7 @@
                                                     "type": "string"
                                                 },
                                                 "postal_code": {
-                                                    "type": "number"
+                                                    "type": "string"
                                                 }
                                             }
                                         },
@@ -130,7 +130,7 @@
                                                         "type": "string"
                                                     },
                                                     "postal_code": {
-                                                        "type": "number"
+                                                        "type": "string"
                                                     }
                                                 }
                                             }
@@ -201,7 +201,7 @@
                                                     "type": "string"
                                                 },
                                                 "postal_code": {
-                                                    "type": "number"
+                                                    "type": "string"
                                                 }
                                             }
                                         },
@@ -262,7 +262,7 @@
                                         "type": "string"
                                     },
                                     "postal_code": {
-                                        "type": "number"
+                                        "type": "string"
                                     }
                                 }
                             }
@@ -296,7 +296,7 @@
                                                     "type": "string"
                                                 },
                                                 "postal_code": {
-                                                    "type": "number"
+                                                    "type": "string"
                                                 }
                                             }
                                         },
