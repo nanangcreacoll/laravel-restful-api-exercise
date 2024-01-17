@@ -28,7 +28,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "required": ["first_name", "last_name"],
+                                "required": ["first_name"],
                                 "type": "object",
                                 "properties": {
                                     "first_name": {
