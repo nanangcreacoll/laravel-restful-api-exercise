@@ -2,9 +2,13 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Models\User;
+use Database\Seeders\UserSeeder;
+use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+
+use function PHPUnit\Framework\assertNotNull;
 
 class UserTest extends TestCase
 {
@@ -50,6 +54,55 @@ class UserTest extends TestCase
             ->assertJson([
                 "errors" => [
                     'username' => ["The username is already registered."]
+                ]
+            ]);
+    }
+
+    public function testLoginSuccess()
+    {
+        $this->seed([UserSeeder::class]);
+        $this->post('/api/users/login', [
+            'username' => 'nanang',
+            'password' => 'password'
+        ])->assertStatus(200)
+            ->assertJson([
+                'data' => [
+                    'username' => 'nanang',
+                    'name' => 'Nanang Muhamad'
+                ]
+            ]);
+
+        $user = User::where('username', 'nanang')->first();
+        self::assertNotNull($user->token);
+    }
+
+    public function testLoginFailedUsernameNotFound()
+    {
+        $this->post('/api/users/login', [
+            'username' => 'nanang',
+            'password' => 'password'
+        ])->assertStatus(401)
+            ->assertJson([
+                'errors' => [
+                    'message' => [
+                        'Username or password wrong.'
+                    ]
+                ]
+            ]);
+    }
+
+    public function testLoginFailedWrongPassword()
+    {
+        $this->seed([UserSeeder::class]);
+        $this->post('/api/users/login', [
+            'username' => 'nanang',
+            'password' => 'wrong'
+        ])->assertStatus(401)
+            ->assertJson([
+                'errors' => [
+                    'message' => [
+                        'Username or password wrong.'
+                    ]
                 ]
             ]);
     }
