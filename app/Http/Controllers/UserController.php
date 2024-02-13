@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserUpdateRequest;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -61,6 +62,25 @@ class UserController extends Controller
     public function get(Request $request): UserResource
     {
         $user = Auth::user();
+        return new UserResource($user);
+    }
+
+    public function update(UserUpdateRequest $request): UserResource
+    {
+        $data = $request->validated();
+        $user = Auth::user();
+
+        if (isset($data['name']))
+        {
+            $user->name = $data['name'];
+        }
+
+        if (isset($data['password']))
+        {
+            $user->password = Hash::make($data['password']);
+        }
+
+        $user->save();
         return new UserResource($user);
     }
 }

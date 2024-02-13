@@ -152,4 +152,74 @@ class UserTest extends TestCase
                 ]
             ]);
     }
+
+    public function testUpdatePasswordSuccess()
+    {
+        $this->seed([UserSeeder::class]);
+        $oldUser = User::where('username', 'nanang')->first();
+
+        $this->patch('/api/users/current', 
+        [
+            'password' => 'password_baru'
+        ],
+        [
+            'Authorization' => 'test_token'
+        ]
+        )->assertStatus(200)
+            ->assertJson([
+                'data' => [
+                    'username' => 'nanang',
+                    'name' => 'Nanang Muhamad'
+                ]
+            ]);
+
+        $newUser = User::where('username', 'nanang')->first();
+        self::assertNotEquals($oldUser->password, $newUser->password);
+    }
+
+    public function testUpdateNameSuccess()
+    {
+        $this->seed([UserSeeder::class]);
+        $oldUser = User::where('username', 'nanang')->first();
+
+        $this->patch('/api/users/current', 
+        [
+            'name' => 'nanang baru'
+        ],
+        [
+            'Authorization' => 'test_token'
+        ]
+        )->assertStatus(200)
+            ->assertJson([
+                'data' => [
+                    'username' => 'nanang',
+                    'name' => 'nanang baru'
+                ]
+            ]);
+
+        $newUser = User::where('username', 'nanang')->first();
+        self::assertNotEquals($oldUser->name, $newUser->name);
+    }
+
+    public function testUpdateFailed()
+    {
+        $this->seed([UserSeeder::class]);
+
+        $this->patch('/api/users/current', 
+        [
+            'name' => 'nanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang barunanang baru'
+        ],
+        [
+            'Authorization' => 'test_token'
+        ]
+        )->assertStatus(400)
+            ->assertJson([
+                'errors' => [
+                    'name' => 
+                    [
+                        'The name field must not be greater than 255 characters.'
+                    ]
+                ]
+            ]);
+    }
 }
