@@ -65,7 +65,7 @@ class ContactTest extends TestCase
             'first_name' => 'Nanang',
             'last_name' => 'Muhamad',
             'email' => 'nanangcreacoll@outlook.com',
-            'phone' => '082146492752'
+            'phone' => '082314533452'
         ],
         [
             'Authorization' => 'wrong_token'
