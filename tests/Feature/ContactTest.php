@@ -17,7 +17,7 @@ class ContactTest extends TestCase
             'first_name' => 'Nanang',
             'last_name' => 'Muhamad',
             'email' => 'nanangcreacoll@outlook.com',
-            'phone' => '082146492752'
+            'phone' => '082314533452'
         ],
         [
             'Authorization' => 'test_token'
@@ -27,7 +27,7 @@ class ContactTest extends TestCase
                     'first_name' => 'Nanang',
                     'last_name' => 'Muhamad',
                     'email' => 'nanangcreacoll@outlook.com',
-                    'phone' => '082146492752'
+                    'phone' => '082314533452'
                 ]
             ]);
     }
@@ -40,7 +40,7 @@ class ContactTest extends TestCase
             'first_name' => '',
             'last_name' => 'Muhamad',
             'email' => 'nanangcreacoll',
-            'phone' => '082146492752'
+            'phone' => '082314533452'
         ],
         [
             'Authorization' => 'test_token'
