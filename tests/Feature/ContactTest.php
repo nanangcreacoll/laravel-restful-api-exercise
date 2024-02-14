@@ -56,4 +56,26 @@ class ContactTest extends TestCase
                 ]
             ]);
     }
+
+    public function testCreateUnauthorized()
+    {
+        $this->seed([UserSeeder::class]);
+
+        $this->post('/api/contacts', [
+            'first_name' => 'Nanang',
+            'last_name' => 'Muhamad',
+            'email' => 'nanangcreacoll@outlook.com',
+            'phone' => '082146492752'
+        ],
+        [
+            'Authorization' => 'wrong_token'
+        ])->assertStatus(401)
+            ->assertJson([
+                'errors' => [
+                    'message' => [
+                        'Unauthorized.'
+                    ]
+                ]
+            ]);
+    }
 }
